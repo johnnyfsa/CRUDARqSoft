@@ -1,18 +1,17 @@
 package control;
 import model.*;
+import view.*;
 import java.io.IOException;
 
 
 public class Main {
 
 	public static void main(String[] args) {
-		ListaCliente list = new ListaCliente();
-		try {
-			FileController.jsonRead(list);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		list.print();
+		
+		
+		ClienteController.carregaClientes();
+		Janela1 Frame = new Janela1();
+		Frame.setVisible(true);
 	}
 
 }
