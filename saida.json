@@ -1,4 +1,4 @@
-{
+[{
   "ClienteFlag": 01 ,
   "Nome": "Allan",
   "Data_Nascimento": "13/10/2000",
@@ -12,4 +12,4 @@
       "CPF": "06699886558"
     }
   ]
-}
+}]
