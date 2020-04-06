@@ -10,7 +10,8 @@ public class Main {
 		
 		
 		ClienteController.carregaClientes();
-		Janela1 Frame = new Janela1();
+		ClienteController.fillTableModel();
+		OverView Frame = new OverView();
 		Frame.setVisible(true);
 	}
 
