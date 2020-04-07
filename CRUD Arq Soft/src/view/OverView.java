@@ -18,30 +18,18 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import control.ClienteController;
+import control.FrameController;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import control.ClienteController;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class OverView extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					OverView frame = new OverView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -53,10 +41,26 @@ public class OverView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		TableModel tb = ClienteController.getClienteTableModel();
-		table = new JTable(tb);
+		/*TableModel tb = ClienteController.getClienteTableModel();
+		table = new JTable(tb);*/
+		
+		
+		//usar esse aqui pra não bugar a design tab, mas a versão de launch é o comentário logo acima
+		table = new JTable();
 		
 		JButton btnNewButton = new JButton("Cadastrar");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				try {
+					FrameController.getClienteForm().setVisible(true);
+					FrameController.getStart().setVisible(false);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		
 		JButton btnNewButton_1 = new JButton("Editar");
 		

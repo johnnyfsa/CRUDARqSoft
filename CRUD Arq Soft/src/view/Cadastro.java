@@ -13,6 +13,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import control.FrameController;
 import sun.font.CreatedFontTracker;
 
 import com.jgoodies.forms.layout.FormSpecs;
@@ -23,6 +24,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Cadastro extends JFrame {
 
@@ -31,58 +34,17 @@ public class Cadastro extends JFrame {
 	private JTextField rg;
 	private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Cadastro frame = new Cadastro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
 	public Cadastro() {
 		setTitle("Cadastrar Cliente");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 540, 671);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),}));
 		
 		MaskFormatter bdate_format;
 		MaskFormatter rg_format;
@@ -91,19 +53,23 @@ public class Cadastro extends JFrame {
 			bdate_format = new MaskFormatter("##/##/####");
 			rg_format = new MaskFormatter("########-##");
 			cpf_format = new MaskFormatter("###.###.###-##");
+			contentPane.setLayout(null);
 			
 			
 			JFormattedTextField data = new JFormattedTextField(bdate_format);  
+			data.setBounds(36, 102, 86, 20);
 			data.setColumns(10);
-			contentPane.add(data, "4, 10, left, default");
+			contentPane.add(data);
 			
 			rg = new JFormattedTextField(rg_format);
-			contentPane.add(rg, "4, 14, left, default");
+			rg.setBounds(36, 148, 94, 20);
+			contentPane.add(rg);
 			rg.setColumns(11);
 			
 			JFormattedTextField cpf = new JFormattedTextField(cpf_format);
+			cpf.setBounds(36, 194, 118, 20);
 			cpf.setColumns(14);
-			contentPane.add(cpf, "4, 18, left, default");
+			contentPane.add(cpf);
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -112,24 +78,30 @@ public class Cadastro extends JFrame {
 		
 		
 		JLabel lblNewLabel = new JLabel("Nome");
-		contentPane.add(lblNewLabel, "4, 4");
+		lblNewLabel.setBounds(36, 36, 483, 14);
+		contentPane.add(lblNewLabel);
 		
 		nome = new JTextField();
-		contentPane.add(nome, "4, 6, left, default");
+		nome.setBounds(36, 56, 166, 20);
+		contentPane.add(nome);
 		nome.setColumns(20);
 		
 		JLabel lblNewLabel_1 = new JLabel("Data de Nascimento");
-		contentPane.add(lblNewLabel_1, "4, 8");
+		lblNewLabel_1.setBounds(36, 82, 483, 14);
+		contentPane.add(lblNewLabel_1);
 		
 		
 		JLabel lblNewLabel_2 = new JLabel("RG");
-		contentPane.add(lblNewLabel_2, "4, 12");
+		lblNewLabel_2.setBounds(36, 128, 483, 14);
+		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblCpf = new JLabel("CPF");
-		contentPane.add(lblCpf, "4, 16");
+		lblCpf.setBounds(36, 174, 483, 14);
+		contentPane.add(lblCpf);
 		
 		JPanel panel = new JPanel();
-		contentPane.add(panel, "4, 20, fill, fill");
+		panel.setBounds(36, 220, 483, 407);
+		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		table = new JTable();
@@ -141,7 +113,7 @@ public class Cadastro extends JFrame {
 		panel.add(lbdependentes);
 		
 		JButton btnCadastrarNovoDependente = new JButton("Cadastrar Novo Dependente");
-		btnCadastrarNovoDependente.setBounds(10, 322, 177, 23);
+		btnCadastrarNovoDependente.setBounds(10, 322, 195, 23);
 		panel.add(btnCadastrarNovoDependente);
 		
 		JButton btnRemoverDependente = new JButton("Remover dependente");
@@ -149,6 +121,14 @@ public class Cadastro extends JFrame {
 		panel.add(btnRemoverDependente);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FrameController.getClienteForm().setVisible(false);
+				FrameController.resetClienteForm();
+				FrameController.getStart().setVisible(true);
+				
+			}
+		});
 		btnCancelar.setBounds(350, 373, 89, 23);
 		panel.add(btnCancelar);
 		
