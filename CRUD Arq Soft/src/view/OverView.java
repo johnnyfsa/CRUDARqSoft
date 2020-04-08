@@ -41,12 +41,12 @@ public class OverView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		/*TableModel tb = ClienteController.getClienteTableModel();
-		table = new JTable(tb);*/
+		TableModel tb = ClienteController.getClienteTableModel();
+		table = new JTable(tb);
 		
 		
 		//usar esse aqui pra não bugar a design tab, mas a versão de launch é o comentário logo acima
-		table = new JTable();
+		//table = new JTable();
 		
 		JButton btnNewButton = new JButton("Cadastrar");
 		btnNewButton.addMouseListener(new MouseAdapter() {

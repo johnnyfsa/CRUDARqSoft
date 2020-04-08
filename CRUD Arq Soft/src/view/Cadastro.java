@@ -13,6 +13,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import control.ClienteController;
 import control.FrameController;
 import sun.font.CreatedFontTracker;
 
@@ -26,6 +27,8 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import model.Cliente;
+
 
 public class Cadastro extends JFrame {
 
@@ -33,7 +36,9 @@ public class Cadastro extends JFrame {
 	private JTextField nome;
 	private JTextField rg;
 	private JTable table;
-
+	private Cliente auxCliente;
+	private JFormattedTextField bdate ;
+	private JFormattedTextField cpf;
 
 	/**
 	 * Create the frame.
@@ -56,17 +61,17 @@ public class Cadastro extends JFrame {
 			contentPane.setLayout(null);
 			
 			
-			JFormattedTextField data = new JFormattedTextField(bdate_format);  
-			data.setBounds(36, 102, 86, 20);
-			data.setColumns(10);
-			contentPane.add(data);
+			bdate = new JFormattedTextField(bdate_format);  
+			bdate.setBounds(36, 102, 86, 20);
+			bdate.setColumns(10);
+			contentPane.add(bdate);
 			
 			rg = new JFormattedTextField(rg_format);
 			rg.setBounds(36, 148, 94, 20);
 			contentPane.add(rg);
 			rg.setColumns(11);
 			
-			JFormattedTextField cpf = new JFormattedTextField(cpf_format);
+			cpf = new JFormattedTextField(cpf_format);
 			cpf.setBounds(36, 194, 118, 20);
 			cpf.setColumns(14);
 			contentPane.add(cpf);
@@ -77,7 +82,7 @@ public class Cadastro extends JFrame {
 		}
 		
 		
-		JLabel lblNewLabel = new JLabel("Nome");
+		JLabel lblNewLabel = new JLabel("Nome*");
 		lblNewLabel.setBounds(36, 36, 483, 14);
 		contentPane.add(lblNewLabel);
 		
@@ -86,7 +91,7 @@ public class Cadastro extends JFrame {
 		contentPane.add(nome);
 		nome.setColumns(20);
 		
-		JLabel lblNewLabel_1 = new JLabel("Data de Nascimento");
+		JLabel lblNewLabel_1 = new JLabel("Data de Nascimento*");
 		lblNewLabel_1.setBounds(36, 82, 483, 14);
 		contentPane.add(lblNewLabel_1);
 		
@@ -95,7 +100,7 @@ public class Cadastro extends JFrame {
 		lblNewLabel_2.setBounds(36, 128, 483, 14);
 		contentPane.add(lblNewLabel_2);
 		
-		JLabel lblCpf = new JLabel("CPF");
+		JLabel lblCpf = new JLabel("CPF*");
 		lblCpf.setBounds(36, 174, 483, 14);
 		contentPane.add(lblCpf);
 		
@@ -131,6 +136,45 @@ public class Cadastro extends JFrame {
 		});
 		btnCancelar.setBounds(350, 373, 89, 23);
 		panel.add(btnCancelar);
+		
+		JButton confirmbtn = new JButton("Confirmar");
+		confirmbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String auxNome = nome.getText();
+				String auxDataDeNascimento = bdate.getText().replaceAll("\\D", "");
+				String auxcpf = cpf.getText().replaceAll("\\D", "");
+				
+				if(auxNome.isEmpty()|| auxDataDeNascimento.isEmpty()||auxcpf.isEmpty()) 
+				{
+					FrameController.error(0);
+					FrameController.getErro().setVisible(true);
+				}
+				else 
+				{
+					auxDataDeNascimento = bdate.getText();
+					Cliente c = new Cliente(auxNome, auxDataDeNascimento, auxcpf, rg.getText());
+					boolean val = ClienteController.getValidadorCliente().validar(c);
+					//se estiver tudo válido
+					if(val == true) 
+					{
+						System.out.println("cpf valido");
+						ClienteController.getClientes().getListaCliente().add(c);
+						ClienteController.salvaClientes();
+					}
+					else
+					{
+						FrameController.error(1);
+						FrameController.getErro().setVisible(true);
+					}
+				}
+			}
+		});
+		confirmbtn.setBounds(10, 373, 89, 23);
+		panel.add(confirmbtn);
+		
+		JLabel lblNewLabel_3 = new JLabel("* Campos Obrigat\u00F3rios ");
+		lblNewLabel_3.setBounds(321, 200, 126, 14);
+		contentPane.add(lblNewLabel_3);
 		
 		
 		

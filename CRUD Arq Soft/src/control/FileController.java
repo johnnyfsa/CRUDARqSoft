@@ -18,23 +18,52 @@ import org.json.simple.parser.ParseException;
 public class FileController {
 	
 	@SuppressWarnings("unchecked")
-    public static void jsonWrite () {
+    public static void jsonWrite (ListaCliente L) {
          
         //Cria um Objeto JSON
-        JSONObject jsonObject = new JSONObject();
-         
+        JSONArray arrJson = new JSONArray();
+        
         FileWriter writeFile = null;
-         
-        //Armazena dados em um Objeto JSON
-        jsonObject.put("nome", "Allan");
-        jsonObject.put("sobrenome", "Romanato");
-        jsonObject.put("pais", "Brasil");
-        jsonObject.put("estado", "SP");
+        
+        Iterator<Cliente> clienteIterator = L.getListaCliente().iterator();
+        while(clienteIterator.hasNext()) 
+        {
+        	JSONObject jsonObject = new JSONObject();
+        	Cliente aux = new Cliente();
+        	aux = clienteIterator.next();
+        	 //Armazena dados em um Objeto JSON
+        	jsonObject.put("ClienteFlag", aux.getClienteFlag());
+            jsonObject.put("Nome", aux.getNome());
+            jsonObject.put("Data_Nascimento", aux.getData_nascimento());
+            jsonObject.put("RG", aux.getRg());
+            jsonObject.put("CPF", aux.getCpf());
+            if(aux.getDependentes().length > 0) 
+            {
+            	JSONArray depList = new JSONArray();
+            	Pessoa Paux[] = new Pessoa[10];
+            	Paux = aux.getDependentes();
+            	for(int i =0; i< aux.getDependentes().length;i++ ) 
+            	{
+            		if(Paux[i]!=null) 
+            		{
+            			JSONObject auxObj = new JSONObject();
+                		auxObj.put("nome", Paux[i].getNome());
+                		auxObj.put("Data_Nascimento", Paux[i].getData_nascimento());
+                		auxObj.put("RG", Paux[i].getRg());
+                		auxObj.put("CPF", Paux[i].getCpf());
+                		depList.add(auxObj);
+            		}
+            		
+            	}
+            	jsonObject.put("Dependentes", depList);
+            }
+           arrJson.add(jsonObject);
+        }
          
         try{
             writeFile = new FileWriter("saida.json");
             //Escreve no arquivo conteudo do Objeto JSON
-            writeFile.write(jsonObject.toJSONString());
+            writeFile.write(arrJson.toJSONString());
             writeFile.close();
         }
         catch(IOException e){

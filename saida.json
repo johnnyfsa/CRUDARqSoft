@@ -1,15 +1,1 @@
-[{
-  "ClienteFlag": 01 ,
-  "Nome": "Allan",
-  "Data_Nascimento": "13/10/2000",
-  "RG": "4578932145",
-  "CPF": "06699886558",
-  "Dependentes": [
-    {
-      "Nome": "Allan",
-      "Data_Nascimento": "13/10/2000",
-      "RG": "4578932145",
-      "CPF": "06699886558"
-    }
-  ]
-}]
+[{"RG":"4578932145","CPF":"06699886558","Dependentes":[{"RG":"4578932145","CPF":"06699886558","Data_Nascimento":"13\/10\/2000","nome":"Allan"}],"ClienteFlag":1,"Data_Nascimento":"13\/10\/2000","Nome":"Allan"},{"RG":"12801678-74","CPF":"05588994558","Dependentes":[],"ClienteFlag":1,"Data_Nascimento":"15\/06\/1993","Nome":"joao"}]

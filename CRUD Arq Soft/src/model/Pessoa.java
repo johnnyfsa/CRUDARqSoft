@@ -5,6 +5,7 @@ public class Pessoa {
 	private String data_nascimento;
 	private String cpf;
 	private String rg;
+	
 	public String getNome() {
 		return nome;
 	}
