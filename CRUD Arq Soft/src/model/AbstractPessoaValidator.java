@@ -1,6 +1,6 @@
 package model;
 
-public abstract class PessoaValidator {
+public abstract class AbstractPessoaValidator {
 	
 	public boolean validar(Pessoa p) 
 	{

@@ -2,15 +2,14 @@ package model;
 
 import java.util.InputMismatchException;
 
-public class ClienteValidator extends AbstractPessoaValidator {
-	
+public class ConcretePessoaValidator extends AbstractPessoaValidator {
 	
 	@Override
 	public boolean validar(Pessoa p) 
 	{
-		Cliente c = (Cliente) p;
-		return this.validaCpf(c.getCpf());
+		return this.validaCpf(p.getCpf());
 	}
+	
 	
 	public boolean validaCpf(String CPF) 
 	{
@@ -70,10 +69,5 @@ public class ClienteValidator extends AbstractPessoaValidator {
 		            }
 		        
 	}
-
-	public static String imprimeCPF(String CPF) {
-        return(CPF.substring(0, 3) + "." + CPF.substring(3, 6) + "." +
-        CPF.substring(6, 9) + "-" + CPF.substring(9, 11));
-    }
 
 }

@@ -6,6 +6,26 @@ public class Pessoa {
 	private String cpf;
 	private String rg;
 	
+	
+	
+	
+	public Pessoa() 
+	{
+		this.setCpf("");
+		this.setData_nascimento("");
+		this.setNome("");
+		this.setRg("");
+	}
+	
+	
+	public Pessoa( String nome, String data_nascimento,String cpf,String rg) 
+	{
+		this.setCpf(cpf);
+		this.setData_nascimento(data_nascimento);
+		this.setNome(nome);
+		this.setRg(rg);
+	}
+	
 	public String getNome() {
 		return nome;
 	}

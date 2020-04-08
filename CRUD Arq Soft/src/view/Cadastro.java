@@ -15,6 +15,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import control.ClienteController;
 import control.FrameController;
+import control.DependenteController;
 import sun.font.CreatedFontTracker;
 
 import com.jgoodies.forms.layout.FormSpecs;
@@ -39,7 +40,7 @@ public class Cadastro extends JFrame {
 	private Cliente auxCliente;
 	private JFormattedTextField bdate ;
 	private JFormattedTextField cpf;
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -50,6 +51,7 @@ public class Cadastro extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		
 		
 		MaskFormatter bdate_format;
 		MaskFormatter rg_format;
@@ -118,6 +120,11 @@ public class Cadastro extends JFrame {
 		panel.add(lbdependentes);
 		
 		JButton btnCadastrarNovoDependente = new JButton("Cadastrar Novo Dependente");
+		btnCadastrarNovoDependente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FrameController.getDependenteForm().setVisible(true);
+			}
+		});
 		btnCadastrarNovoDependente.setBounds(10, 322, 195, 23);
 		panel.add(btnCadastrarNovoDependente);
 		
@@ -160,6 +167,7 @@ public class Cadastro extends JFrame {
 						System.out.println("cpf valido");
 						ClienteController.getClientes().getListaCliente().add(c);
 						ClienteController.salvaClientes();
+						DependenteController.resetDependentes();
 					}
 					else
 					{

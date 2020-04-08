@@ -3,6 +3,7 @@ package control;
 import model.ListaCliente;
 import model.ClienteTableModel;
 import model.ClienteValidator;
+import model.ConcretePessoaValidator;
 
 public class ClienteController {
 
@@ -10,6 +11,7 @@ public class ClienteController {
 	private static ListaCliente lista_de_clientes = new ListaCliente();
 	private static ClienteTableModel ctm = new ClienteTableModel();
 	private static ClienteValidator validadorCliente = new ClienteValidator();
+	
 	
 	public static void carregaClientes() 
 	{
@@ -49,5 +51,7 @@ public class ClienteController {
 	public static void setValidadorCliente(ClienteValidator cVal) {
 		ClienteController.validadorCliente = cVal;
 	}
+
+	
 	
 }
