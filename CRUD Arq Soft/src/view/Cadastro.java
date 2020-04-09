@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -36,7 +37,7 @@ public class Cadastro extends JFrame {
 	private JPanel contentPane;
 	private JTextField nome;
 	private JTextField rg;
-	private JTable table;
+	private JTable dependenteTable;
 	private Cliente auxCliente;
 	private JFormattedTextField bdate ;
 	private JFormattedTextField cpf;
@@ -45,6 +46,7 @@ public class Cadastro extends JFrame {
 	 * Create the frame.
 	 */
 	public Cadastro() {
+		TableModel dependenteTableModel = DependenteController.getDependenteTable();
 		setTitle("Cadastrar Cliente");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 540, 671);
@@ -111,9 +113,10 @@ public class Cadastro extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		table = new JTable();
-		table.setBounds(10, 55, 429, 229);
-		panel.add(table);
+		//dependenteTable = new JTable();
+		dependenteTable = new JTable(dependenteTableModel);
+		dependenteTable.setBounds(10, 55, 429, 229);
+		panel.add(dependenteTable);
 		
 		JLabel lbdependentes = new JLabel("Dependentes");
 		lbdependentes.setBounds(10, 23, 117, 21);
@@ -136,6 +139,7 @@ public class Cadastro extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FrameController.getClienteForm().setVisible(false);
+				DependenteController.resetDependentes();
 				FrameController.resetClienteForm();
 				FrameController.getStart().setVisible(true);
 				
@@ -177,7 +181,7 @@ public class Cadastro extends JFrame {
 				}
 			}
 		});
-		confirmbtn.setBounds(10, 373, 89, 23);
+		confirmbtn.setBounds(10, 373, 117, 23);
 		panel.add(confirmbtn);
 		
 		JLabel lblNewLabel_3 = new JLabel("* Campos Obrigat\u00F3rios ");
@@ -187,5 +191,9 @@ public class Cadastro extends JFrame {
 		
 		
 		
+	}
+	public JTable getDependenteTable() 
+	{
+		return dependenteTable;
 	}
 }

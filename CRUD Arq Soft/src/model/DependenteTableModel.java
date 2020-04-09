@@ -5,14 +5,14 @@ import java.util.Iterator;
 
 import javax.swing.table.AbstractTableModel;
 
-public class ClienteTableModel extends AbstractTableModel {
+public class DependenteTableModel extends AbstractTableModel {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private String[] columnNames = {"Nome", "CPF"};
-	private String[][] data;
+	private String[][] data = new String[10][2];
 	
 	
 	public String getColumnName(int col) 
@@ -38,23 +38,26 @@ public class ClienteTableModel extends AbstractTableModel {
 		return data[arg0][arg1];
 	}
 	
-	public void fillData( ArrayList<Cliente> c) 
+	public void fillData( Pessoa p[]) 
 	{
-		int line = c.size();
-		data = new String[line][2];
-		Iterator<Cliente> clienteIterator = c.iterator();
+		int line = p.length;
 		int i=0;
 		int j=0;
-		while(clienteIterator.hasNext()) 
+		int pessoaIt = 0;
+		while(pessoaIt<=line-1) 
 		{
-			Cliente aux = clienteIterator.next();
+			Pessoa aux = new Pessoa();
+			if(p[pessoaIt]!=null) 
+			{
+				aux = p[pessoaIt];
+			}
 			data[i][j] = aux.getNome();
 			data[i][j+1] = aux.getCpf();
 			if(i+1<line) 
 			{
 				i++;
 			}
-			
+		pessoaIt++;
 		}
 	}
 

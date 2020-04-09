@@ -132,6 +132,8 @@ public class AddDependente extends JFrame {
 					{
 						System.out.println("cpf valido");
 						DependenteController.adicionaDependente(p);
+						FrameController.getClienteForm().getDependenteTable().repaint();
+						FrameController.getDependenteForm().dispose();
 					}
 					//senão
 					else
