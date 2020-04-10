@@ -13,7 +13,7 @@ public class DependenteController {
 	public static void resetDependentes() 
 	{
 		setDependentes(new Pessoa[10]);
-		fillDependenteTable();
+		dependenteTable.fillData(dependentes);
 	}
 	
 	public static void adicionaDependente(Pessoa p) 
@@ -26,7 +26,7 @@ public class DependenteController {
 				break;
 			}
 		}
-		fillDependenteTable();
+		dependenteTable.fillData(dependentes);
 	}
 	
 	public static void removeDependente() 
@@ -57,9 +57,5 @@ public class DependenteController {
 
 	public static void setDependenteTable(DependenteTableModel dependenteTable) {
 		DependenteController.dependenteTable = dependenteTable;
-	}
-	public static void fillDependenteTable() 
-	{
-		dependenteTable.fillData(dependentes);
 	}
 }

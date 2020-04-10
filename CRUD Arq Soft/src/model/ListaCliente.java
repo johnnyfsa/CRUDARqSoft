@@ -11,7 +11,31 @@ public class ListaCliente implements Printer {
 	{
 		listaCliente = new ArrayList<Cliente>();
 	}
-
+	
+	public void replaceCliente( Cliente spare) 
+	{
+		String key = spare.getCpf();
+		int i=0;
+		for( i=0;i<listaCliente.size();i++) 
+		{
+			if(listaCliente.get(i).getCpf().equals(key)) 
+			{
+				break;
+			}
+		}
+		listaCliente.set(i, spare);
+	}
+	
+	
+	public void remove(String key) 
+	{
+		ArrayList<Cliente> temp = buscaCliente(key, 2);
+		for(int i =0 ; i< temp.size();i++) 
+		{
+			listaCliente.remove(temp.get(i));
+		}
+	}
+	
 	public ArrayList<Cliente> getListaCliente() {
 		return listaCliente;
 	}
@@ -20,6 +44,52 @@ public class ListaCliente implements Printer {
 		this.listaCliente = listaCliente;
 	}
 
+	public  ArrayList<Cliente> buscaCliente(String key, int type)
+	{
+		Iterator<Cliente> clienteIt = listaCliente.iterator();
+		Cliente aux = new Cliente();
+		ArrayList<Cliente> resultado = new ArrayList<Cliente>();
+		//type é o tipo de dado
+		switch(type) 
+		{
+		//Nome
+		case 0:
+			while(clienteIt.hasNext()) 
+			{
+				aux = clienteIt.next();
+				if(aux.getNome().contains(key)) 
+				{
+					resultado.add(aux);
+				}
+			}
+			
+			break;
+		//RG
+		case 1:
+			while(clienteIt.hasNext()) 
+			{
+				aux = clienteIt.next();
+				if(aux.getRg().contains(key)) 
+				{
+					resultado.add(aux);
+				}
+			}
+			break;
+		//CPF
+		case 2:
+			while(clienteIt.hasNext()) 
+			{
+				aux = clienteIt.next();
+				if(aux.getCpf().contains(key)) 
+				{
+					resultado.add(aux);
+				}
+			}
+			break;
+		}
+		return resultado;
+	}
+	
 	@Override
 	public void print() {
 		// TODO Auto-generated method stub

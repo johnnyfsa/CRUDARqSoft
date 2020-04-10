@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -32,7 +33,7 @@ import java.awt.event.ActionEvent;
 import model.Cliente;
 
 
-public class Cadastro extends JFrame {
+public class ClienteEditFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nome;
@@ -45,10 +46,16 @@ public class Cadastro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cadastro() {
+	public ClienteEditFrame(String key) {
+		ArrayList<Cliente> aux = ClienteController.getClientes().buscaCliente(key, 2);
+		Cliente current = aux.get(0);
+		DependenteController.setDependentes(current.getDependentes());
+		DependenteController.getDependenteTable().fillData(current.getDependentes());
+		
+		
 		setResizable(false);
-		TableModel dependenteTableModel = DependenteController.getDependenteTable();
-		setTitle("Cadastrar Cliente");
+		TableModel dtm = DependenteController.getDependenteTable();
+		setTitle("Editar Cliente");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 540, 671);
 		contentPane = new JPanel();
@@ -70,16 +77,19 @@ public class Cadastro extends JFrame {
 			bdate.setBounds(36, 102, 86, 20);
 			bdate.setColumns(10);
 			contentPane.add(bdate);
+			bdate.setText(current.getData_nascimento());
 			
 			rg = new JFormattedTextField(rg_format);
 			rg.setBounds(36, 148, 94, 20);
 			contentPane.add(rg);
 			rg.setColumns(11);
+			rg.setText(current.getRg());
 			
 			cpf = new JFormattedTextField(cpf_format);
 			cpf.setBounds(36, 194, 118, 20);
 			cpf.setColumns(14);
 			contentPane.add(cpf);
+			cpf.setText(current.getCpf());
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -91,10 +101,12 @@ public class Cadastro extends JFrame {
 		lblNewLabel.setBounds(36, 36, 483, 14);
 		contentPane.add(lblNewLabel);
 		
+		
 		nome = new JTextField();
 		nome.setBounds(36, 56, 166, 20);
 		contentPane.add(nome);
 		nome.setColumns(20);
+		nome.setText(current.getNome());
 		
 		JLabel lblNewLabel_1 = new JLabel("Data de Nascimento*");
 		lblNewLabel_1.setBounds(36, 82, 483, 14);
@@ -114,8 +126,7 @@ public class Cadastro extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		//dependenteTable = new JTable();
-		dependenteTable = new JTable(dependenteTableModel);
+		dependenteTable = new JTable(dtm);
 		dependenteTable.setBounds(10, 55, 429, 229);
 		panel.add(dependenteTable);
 		
@@ -126,7 +137,7 @@ public class Cadastro extends JFrame {
 		JButton btnCadastrarNovoDependente = new JButton("Cadastrar Novo Dependente");
 		btnCadastrarNovoDependente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FrameController.getDependenteForm().setVisible(true);
+				FrameController.getDependenteFromEdit().setVisible(true);
 			}
 		});
 		btnCadastrarNovoDependente.setBounds(10, 322, 195, 23);
@@ -139,7 +150,7 @@ public class Cadastro extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FrameController.getClienteForm().setVisible(false);
+				FrameController.getEditar().setVisible(false);
 				DependenteController.resetDependentes();
 				FrameController.resetClienteForm();
 				FrameController.getStart().setVisible(true);
@@ -172,9 +183,10 @@ public class Cadastro extends JFrame {
 					{
 						System.out.println("cpf valido");
 						c.setDependentes(DependenteController.getDependentes());
-						ClienteController.getClientes().getListaCliente().add(c);
+						ClienteController.getClientes().replaceCliente(c);
 						ClienteController.salvaClientes();
 						DependenteController.resetDependentes();
+						FrameController.getEditar().dispose();
 					}
 					else
 					{

@@ -1,8 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import javax.swing.table.AbstractTableModel;
 
 public class DependenteTableModel extends AbstractTableModel {

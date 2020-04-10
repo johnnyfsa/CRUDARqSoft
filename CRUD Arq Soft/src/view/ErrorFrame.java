@@ -42,6 +42,7 @@ public class ErrorFrame extends JFrame {
 		}	
 		//setTitle("Erro 0");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.setResizable(false);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -8,6 +8,9 @@ public class FrameController {
 	private static Cadastro clienteForm = new Cadastro();
 	private static ErrorFrame erro;
 	private static AddDependente dependenteForm = new AddDependente();
+	private static AddDependenteFromEdit dependenteFromEdit = new AddDependenteFromEdit();
+	private static ClienteFrame clienteView;
+	private static ClienteEditFrame editar;
 	
 	
 	public static void error(int code) 
@@ -57,6 +60,36 @@ public class FrameController {
 
 	public static void setDependenteForm(AddDependente adicionaDependente) {
 		FrameController.dependenteForm = adicionaDependente;
+	}
+
+
+	public static ClienteFrame getClienteView() {
+		return clienteView;
+	}
+
+
+	public static void setClienteView(ClienteFrame clienteView) {
+		FrameController.clienteView = clienteView;
+	}
+
+
+	public static ClienteEditFrame getEditar() {
+		return editar;
+	}
+
+
+	public static void setEditar(ClienteEditFrame editar) {
+		FrameController.editar = editar;
+	}
+
+
+	public static AddDependenteFromEdit getDependenteFromEdit() {
+		return dependenteFromEdit;
+	}
+
+
+	public static void setDependenteFromEdit(AddDependenteFromEdit dependenteFromEdit) {
+		FrameController.dependenteFromEdit = dependenteFromEdit;
 	}
 
 

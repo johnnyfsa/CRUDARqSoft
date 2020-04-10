@@ -23,7 +23,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class AddDependente extends JFrame {
+public class AddDependenteFromEdit extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nome;
@@ -34,7 +34,7 @@ public class AddDependente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AddDependente() {
+	public AddDependenteFromEdit() {
 		setResizable(false);
 		setTitle("Cadastrar Dependente");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -104,7 +104,7 @@ public class AddDependente extends JFrame {
 		JButton cancelbtn = new JButton("cancelar");
 		cancelbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FrameController.getDependenteForm().setVisible(false);
+				FrameController.getDependenteFromEdit().dispose();
 				FrameController.resetDependenteForm();
 			}
 		});
@@ -134,7 +134,7 @@ public class AddDependente extends JFrame {
 						System.out.println("cpf valido");
 						DependenteController.adicionaDependente(p);
 						FrameController.getEditar().getDependenteTable().repaint();
-						FrameController.getDependenteForm().dispose();
+						FrameController.getDependenteFromEdit().dispose();
 					}
 					//senão
 					else

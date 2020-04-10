@@ -1,13 +1,10 @@
 package control;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.Scanner;
 import model.*;
 
 import org.json.simple.JSONArray;
@@ -33,7 +30,7 @@ public class FileController {
         	aux = clienteIterator.next();
         	 //Armazena dados em um Objeto JSON
         	jsonObject.put("ClienteFlag", aux.getClienteFlag());
-            jsonObject.put("Nome", aux.getNome());
+            jsonObject.put("nome", aux.getNome());
             jsonObject.put("Data_Nascimento", aux.getData_nascimento());
             jsonObject.put("RG", aux.getRg());
             jsonObject.put("CPF", aux.getCpf());
@@ -101,7 +98,7 @@ public class FileController {
                  //Salva nas variaveis os dados retirados do arquivo
                  aux = (Long) jsonObject.get("ClienteFlag");
                  c.setClienteFlag(aux.intValue());
-                 c.setNome((String) jsonObject.get("Nome"));
+                 c.setNome((String) jsonObject.get("nome"));
                  c.setData_nascimento((String) jsonObject.get("Data_Nascimento"));
                  c.setRg((String) jsonObject.get("RG"));
                  c.setCpf((String) jsonObject.get("CPF"));
@@ -116,7 +113,7 @@ public class FileController {
                  	jsonObject = internalIterator.next();
                  	arrayPessoas[i].setCpf((String) jsonObject.get("CPF"));
                  	arrayPessoas[i].setData_nascimento((String) jsonObject.get("Data_Nascimento"));
-                 	arrayPessoas[i].setNome((String) jsonObject.get("Nome"));
+                 	arrayPessoas[i].setNome((String) jsonObject.get("nome"));
                  	arrayPessoas[i].setRg((String) jsonObject.get("RG"));
                  	i++;
                  	

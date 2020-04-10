@@ -1,9 +1,12 @@
 package control;
 
 import model.ListaCliente;
+
+import java.util.ArrayList;
+
+import model.Cliente;
 import model.ClienteTableModel;
 import model.ClienteValidator;
-import model.ConcretePessoaValidator;
 
 public class ClienteController {
 
@@ -13,20 +16,21 @@ public class ClienteController {
 	private static ClienteValidator validadorCliente = new ClienteValidator();
 	
 	
+	public static void busca( String key, int type) 
+	{
+		ArrayList<Cliente> aux = lista_de_clientes.buscaCliente(key, type);
+		ctm.fillData(aux);
+	}
+	
 	public static void carregaClientes() 
 	{
 		FileController.jsonRead(lista_de_clientes);
-		ClienteController.fillTableModel();
+		ctm.fillData(lista_de_clientes.getListaCliente());
 	}
 	
 	public static void salvaClientes() 
 	{
 		FileController.jsonWrite(lista_de_clientes);
-		ClienteController.fillTableModel();
-	}
-	
-	public static void fillTableModel(  ) 
-	{
 		ctm.fillData(lista_de_clientes.getListaCliente());
 	}
 	
@@ -51,7 +55,7 @@ public class ClienteController {
 	public static void setValidadorCliente(ClienteValidator cVal) {
 		ClienteController.validadorCliente = cVal;
 	}
-
+	
 	
 	
 }
