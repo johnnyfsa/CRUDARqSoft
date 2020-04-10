@@ -39,6 +39,10 @@ public class ErrorFrame extends JFrame {
 			setTitle("Erro 1");
 			errorMsg = new JLabel("Erro: : CPF inválido");
 			break;
+		case 2:
+			setTitle("Erro 2");
+			errorMsg = new JLabel("Erro: : CPF já cadastrado");
+			break;
 		}	
 		//setTitle("Erro 0");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

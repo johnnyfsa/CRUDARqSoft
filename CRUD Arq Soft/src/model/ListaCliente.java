@@ -90,6 +90,16 @@ public class ListaCliente implements Printer {
 		return resultado;
 	}
 	
+	public boolean adicionaCliente(Cliente c) 
+	{
+		if(buscaCliente(c.getCpf(), 2).isEmpty()) 
+		{
+			listaCliente.add(c);
+			return true;
+		}
+		return false;
+	}
+	
 	@Override
 	public void print() {
 		// TODO Auto-generated method stub

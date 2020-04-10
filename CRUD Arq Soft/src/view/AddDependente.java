@@ -34,6 +34,7 @@ public class AddDependente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public AddDependente() {
 		setResizable(false);
 		setTitle("Cadastrar Dependente");
@@ -133,7 +134,7 @@ public class AddDependente extends JFrame {
 					{
 						System.out.println("cpf valido");
 						DependenteController.adicionaDependente(p);
-						FrameController.getEditar().getDependenteTable().repaint();
+						FrameController.getClienteForm().getDpt().repaint();;
 						FrameController.getDependenteForm().dispose();
 					}
 					//senão

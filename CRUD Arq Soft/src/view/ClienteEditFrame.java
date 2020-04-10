@@ -86,6 +86,7 @@ public class ClienteEditFrame extends JFrame {
 			rg.setText(current.getRg());
 			
 			cpf = new JFormattedTextField(cpf_format);
+			cpf.setEditable(false);
 			cpf.setBounds(36, 194, 118, 20);
 			cpf.setColumns(14);
 			contentPane.add(cpf);
@@ -117,7 +118,7 @@ public class ClienteEditFrame extends JFrame {
 		lblNewLabel_2.setBounds(36, 128, 483, 14);
 		contentPane.add(lblNewLabel_2);
 		
-		JLabel lblCpf = new JLabel("CPF*");
+		JLabel lblCpf = new JLabel("CPF");
 		lblCpf.setBounds(36, 174, 483, 14);
 		contentPane.add(lblCpf);
 		
@@ -144,6 +145,14 @@ public class ClienteEditFrame extends JFrame {
 		panel.add(btnCadastrarNovoDependente);
 		
 		JButton btnRemoverDependente = new JButton("Remover dependente");
+		btnRemoverDependente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row = dependenteTable.getSelectedRow(); // select a row
+				String auxCpf =(String)dependenteTable.getValueAt(row, 1);
+				DependenteController.removeDependente(auxCpf);
+				FrameController.getEditar().getDependenteTable().repaint();
+			}
+		});
 		btnRemoverDependente.setBounds(283, 322, 156, 23);
 		panel.add(btnRemoverDependente);
 		

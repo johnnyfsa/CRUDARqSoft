@@ -45,6 +45,11 @@ public class Cadastro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	public JTable getDpt() 
+	{
+		return dependenteTable;
+	}
+	
 	public Cadastro() {
 		setResizable(false);
 		TableModel dependenteTableModel = DependenteController.getDependenteTable();
@@ -133,6 +138,14 @@ public class Cadastro extends JFrame {
 		panel.add(btnCadastrarNovoDependente);
 		
 		JButton btnRemoverDependente = new JButton("Remover dependente");
+		btnRemoverDependente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int row = dependenteTable.getSelectedRow(); // select a row
+				String auxCpf =(String)dependenteTable.getValueAt(row, 1);
+				DependenteController.removeDependente(auxCpf);
+				dependenteTable.repaint();
+			}
+		});
 		btnRemoverDependente.setBounds(283, 322, 156, 23);
 		panel.add(btnRemoverDependente);
 		
@@ -172,9 +185,19 @@ public class Cadastro extends JFrame {
 					{
 						System.out.println("cpf valido");
 						c.setDependentes(DependenteController.getDependentes());
-						ClienteController.getClientes().getListaCliente().add(c);
+						if(ClienteController.getClientes().adicionaCliente(c))
+						{
 						ClienteController.salvaClientes();
 						DependenteController.resetDependentes();
+						FrameController.resetClienteForm();
+						FrameController.getStart().setVisible(true);
+						FrameController.getClienteForm().dispose();
+						}
+						else
+						{
+							FrameController.error(2);
+							FrameController.getErro().setVisible(true);
+						}
 					}
 					else
 					{

@@ -47,6 +47,11 @@ public class OverView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	public JTable getTable() 
+	{
+		return table;
+	}
+	
 	public OverView() {
 		setResizable(false);
 		setTitle("CRUD");
@@ -64,6 +69,7 @@ public class OverView extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				try {
+					FrameController.resetClienteForm();
 					FrameController.getClienteForm().setVisible(true);
 					FrameController.getStart().setVisible(false);
 				} catch (Exception e) {

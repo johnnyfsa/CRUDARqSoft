@@ -132,6 +132,7 @@ public class ClienteFrame extends JFrame {
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				DependenteController.resetDependentes();
 				dispose();
 			}
 		});

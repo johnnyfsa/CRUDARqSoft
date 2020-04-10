@@ -29,9 +29,20 @@ public class DependenteController {
 		dependenteTable.fillData(dependentes);
 	}
 	
-	public static void removeDependente() 
+	public static void removeDependente(String cpf ) 
 	{
-		
+		for(int i=0;i<getDependentes().length;i++) 
+		{
+			if(getDependentes()[i]!=null) 
+			{
+				if(getDependentes()[i].getCpf().equals(cpf)) 
+				{
+					dependentes[i] = null;
+				}
+			}
+			
+		}
+		dependenteTable.fillData(dependentes);
 	}
 
 	
