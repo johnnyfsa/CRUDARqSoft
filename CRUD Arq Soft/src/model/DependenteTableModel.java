@@ -8,7 +8,7 @@ public class DependenteTableModel extends AbstractTableModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String[] columnNames = {"Nome", "CPF"};
+	private String[] columnNames = {"Nome", "RG"};
 	private String[][] data = new String[10][2];
 	
 	
@@ -49,7 +49,7 @@ public class DependenteTableModel extends AbstractTableModel {
 				aux = p[pessoaIt];
 			}
 			data[i][j] = aux.getNome();
-			data[i][j+1] = aux.getCpf();
+			data[i][j+1] = aux.getRg();
 			if(i+1<line) 
 			{
 				i++;

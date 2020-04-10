@@ -131,6 +131,7 @@ public class Cadastro extends JFrame {
 		JButton btnCadastrarNovoDependente = new JButton("Cadastrar Novo Dependente");
 		btnCadastrarNovoDependente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				FrameController.resetDependenteForm();
 				FrameController.getDependenteForm().setVisible(true);
 			}
 		});

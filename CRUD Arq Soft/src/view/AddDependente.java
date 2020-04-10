@@ -116,10 +116,11 @@ public class AddDependente extends JFrame {
 		confirmbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String auxNome = nome.getText();
-				String auxDataDeNascimento = bdate.getText().replaceAll("\\D", "");
+				String auxDataDeNascimento = bdate.getText();
 				String auxcpf = cpf.getText().replaceAll("\\D", "");
+				String auxRG = rg.getText().replaceAll("\\D", "");
 				
-				if(auxNome.isEmpty()|| auxDataDeNascimento.isEmpty()||auxcpf.isEmpty()) 
+				if(auxNome.isEmpty()|| auxDataDeNascimento.isEmpty()||auxRG.isEmpty()) 
 				{
 					FrameController.error(0);
 					FrameController.getErro().setVisible(true);
@@ -127,7 +128,7 @@ public class AddDependente extends JFrame {
 				else 
 				{
 					auxDataDeNascimento = bdate.getText();
-					Pessoa p = new Pessoa(auxNome, auxDataDeNascimento, auxcpf, rg.getText());
+					Pessoa p = new Pessoa(auxNome, auxDataDeNascimento, auxcpf, auxRG);
 					boolean val = DependenteController.getValidadorDependente().validar(p);
 					//se estiver tudo válido
 					if(val == true) 
@@ -140,8 +141,16 @@ public class AddDependente extends JFrame {
 					//senão
 					else
 					{
-						FrameController.error(1);
-						FrameController.getErro().setVisible(true);
+						if(DependenteController.getValidadorDependente().isMenor_de_21()==false) 
+						{
+							FrameController.error(3);
+							FrameController.getErro().setVisible(true);
+						}
+						else 
+						{
+							FrameController.error(1);
+							FrameController.getErro().setVisible(true);
+						}
 					}
 				}
 			}

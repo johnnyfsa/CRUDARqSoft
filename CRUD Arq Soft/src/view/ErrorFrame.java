@@ -37,11 +37,15 @@ public class ErrorFrame extends JFrame {
 			break;
 		case 1:
 			setTitle("Erro 1");
-			errorMsg = new JLabel("Erro: : CPF inválido");
+			errorMsg = new JLabel("Erro: CPF inválido");
 			break;
 		case 2:
 			setTitle("Erro 2");
-			errorMsg = new JLabel("Erro: : CPF já cadastrado");
+			errorMsg = new JLabel("Erro: CPF já cadastrado");
+			break;
+		case 3:
+			setTitle("Erro 2");
+			errorMsg = new JLabel("Erro: Usuário Maior de 21");
 			break;
 		}	
 		//setTitle("Erro 0");

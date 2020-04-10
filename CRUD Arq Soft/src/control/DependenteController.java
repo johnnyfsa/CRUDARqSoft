@@ -29,13 +29,13 @@ public class DependenteController {
 		dependenteTable.fillData(dependentes);
 	}
 	
-	public static void removeDependente(String cpf ) 
+	public static void removeDependente(String rg ) 
 	{
 		for(int i=0;i<getDependentes().length;i++) 
 		{
 			if(getDependentes()[i]!=null) 
 			{
-				if(getDependentes()[i].getCpf().equals(cpf)) 
+				if(getDependentes()[i].getRg().equals(rg)) 
 				{
 					dependentes[i] = null;
 				}

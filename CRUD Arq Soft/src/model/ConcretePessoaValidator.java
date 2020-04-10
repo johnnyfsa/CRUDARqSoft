@@ -1,13 +1,43 @@
 package model;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 
 public class ConcretePessoaValidator extends AbstractPessoaValidator {
 	
+	
+	private boolean menor_de_21;
+	private boolean menor_de_5;
+	
 	@Override
 	public boolean validar(Pessoa p) 
 	{
-		return this.validaCpf(p.getCpf());
+		boolean cpf_valido = validaCpf(p.getCpf());
+		validaIdade(p);
+		if(menor_de_5) 
+		{
+			return true;
+		} 
+		return isMenor_de_21() && cpf_valido;
+	}
+	
+	public void validaIdade(Pessoa p) 
+	{
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+		String date = p.getData_nascimento();
+		LocalDate localDate = LocalDate.parse(date, formatter);
+		LocalDate now = LocalDate.now();
+		Period diff = Period.between(localDate, now);
+		if(diff.getYears() > 21) 
+		{
+			setMenor_de_21(false);
+		}
+		if(diff.getYears() < 6) 
+		{
+			setMenor_de_5(true);
+		}
 	}
 	
 	
@@ -68,6 +98,23 @@ public class ConcretePessoaValidator extends AbstractPessoaValidator {
 		                return(false);
 		            }
 		        
+	}
+
+	public boolean isMenor_de_5() {
+		return menor_de_5;
+	}
+
+	public boolean setMenor_de_5(boolean menor_de_5) {
+		this.menor_de_5 = menor_de_5;
+		return menor_de_5;
+	}
+
+	public boolean isMenor_de_21() {
+		return menor_de_21;
+	}
+
+	public void setMenor_de_21(boolean menor_de_21) {
+		this.menor_de_21 = menor_de_21;
 	}
 
 }

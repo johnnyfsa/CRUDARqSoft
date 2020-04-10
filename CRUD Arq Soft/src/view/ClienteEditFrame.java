@@ -148,8 +148,8 @@ public class ClienteEditFrame extends JFrame {
 		btnRemoverDependente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = dependenteTable.getSelectedRow(); // select a row
-				String auxCpf =(String)dependenteTable.getValueAt(row, 1);
-				DependenteController.removeDependente(auxCpf);
+				String auxrg =(String)dependenteTable.getValueAt(row, 1);
+				DependenteController.removeDependente(auxrg);
 				FrameController.getEditar().getDependenteTable().repaint();
 			}
 		});

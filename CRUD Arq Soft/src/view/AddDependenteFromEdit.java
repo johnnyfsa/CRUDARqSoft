@@ -117,8 +117,9 @@ public class AddDependenteFromEdit extends JFrame {
 				String auxNome = nome.getText();
 				String auxDataDeNascimento = bdate.getText().replaceAll("\\D", "");
 				String auxcpf = cpf.getText().replaceAll("\\D", "");
+				String auxRG = rg.getText().replaceAll("\\D", "");
 				
-				if(auxNome.isEmpty()|| auxDataDeNascimento.isEmpty()||auxcpf.isEmpty()) 
+				if(auxNome.isEmpty()|| auxDataDeNascimento.isEmpty()||auxRG.isEmpty()) 
 				{
 					FrameController.error(0);
 					FrameController.getErro().setVisible(true);
